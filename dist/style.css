@@ -1,0 +1,116 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+}
+
+.study {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("images/studying.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+.study::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.heading {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    color: white;
+}
+
+#home,
+#setting {
+    font-size: 16px;
+    color: white;
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+#home {
+    font-size: 20px;
+}
+#setting {
+    margin-top: 20px;
+}
+#setting:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+#setting img {
+    width: 20px;
+    height: 20px;
+}
+
+.card {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin: 50px auto;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card button {
+    flex: 1;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: background 0.2s ease;
+}
+.card button:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.time {
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 125px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+#start {
+    flex: none;
+    background: white;
+    width: 150px;
+    height: 50px;
+    margin: 10px auto;
+}
