@@ -69,12 +69,9 @@ body, html {
     position: relative;
     z-index: 2;
     color: #fff;
-}
-
-.card {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
-    margin: 50px auto;
+    margin: 30px auto 30px;
     width: 500px;
     display: flex;
     flex-wrap: wrap;
@@ -113,4 +110,111 @@ body, html {
     width: 150px;
     height: 50px;
     margin: 10px auto;
+}
+
+#count,
+#task {
+    position: relative;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    margin: 5px;
+}
+
+#count {
+    display: block;
+    margin: 5px auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.tasks {
+    position: relative;
+    width: 500px;
+    margin: 10px auto;
+}
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+}
+#taskHeader {
+    color: white;
+}
+.task-header button {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 25%;
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+}
+.task-header button img {
+    width: 30px;
+}
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.task-content p {
+    font-size: 20px;
+}
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.task-content button {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    min-height: 80px;
+}
+.left img {
+    width: 30px;
+}
+.right {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    margin-right: 10px;
+}
+#content {
+    margin: 0;
+    font-weight: bold;
+}
+#num {
+    margin: 0;
+    font-weight: bold;
+}
+#right img {
+    width: 30px;
+}
+#details {
+    margin: 0;
+    margin-left: 40px;
+    font-size: 0.9em;
+}
+
+.add-task {
+    margin-top: 10px;
+}
+.add-task button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    border: dotted #fff;
+    color: #fff;
+    cursor: pointer;
+}
+.add-task img {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
 }
