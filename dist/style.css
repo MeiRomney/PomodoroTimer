@@ -139,6 +139,9 @@ body, html {
     display: flex;
     justify-content: space-between;
     width: 500px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0;
+    margin-bottom: 10px;
 }
 #taskHeader {
     color: white;
@@ -171,7 +174,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
     padding: 10px;
     border-radius: 10px;
     min-height: 80px;
@@ -209,13 +212,18 @@ body, html {
 }
 #details {
     margin: 0;
-    margin-left: 40px;
+    margin-top: 10px;
+    margin-left: 5px;
     font-size: 0.9em;
 }
 
 .task-menu {
-    background: none;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
     border: none;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
     cursor: pointer;
 }
 .task-menu img {
@@ -240,6 +248,13 @@ body, html {
     width: 40px;
     height: 40px;
     padding: 10px;
+}
+
+.line {
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    margin-top: 10px 0 0;
+    width: 100%;
 }
 
 .task-footer {
