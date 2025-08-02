@@ -13,18 +13,28 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("images/studying.jpg");
     background-size: cover;
     background-position: center;
     z-index: 0;
 }
+.study {
+    visibility: hidden;
+    background-image: url("images/studying.jpg");
+}
 .rest-short {
+    visibility: hidden;
     background-image: url("images/restingShort.jpg");
 }
 .rest-long {
+    visibility: hidden;
     background-image: url("images/restingLong.jpg");
 }
-.study::before {
+.visible {
+    visibility: visible;
+}
+.study::before,
+.rest-short::before,
+.rest-long::before {
     content: "";
     position: absolute;
     top: 0;
@@ -161,6 +171,7 @@ body, html {
     width: 50px;
     height: 50px;
     margin-top: 15px;
+    cursor: pointer;
 }
 .task-header button img {
     width: 30px;
@@ -278,4 +289,135 @@ body, html {
     font-weight: bold;
     font-size: 25px;
     border-radius: 15px;
+}
+
+.setting {
+    visibility: hidden;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: #fff;
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 25px;
+    padding: 20px;
+}
+.setting.visible {
+    visibility: visible;
+}
+.setting-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.setting h1 {
+    color: #444;
+    font-size: 24px;
+}
+#close {
+    background: none;
+    border: none;
+    height: 35px;
+    width: 35px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#close:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+#close img{
+    width: 30px;
+    height: 30px;
+}
+.setting hr {
+    padding: 0;
+    width: 100%;
+    border: none;
+    border-top: 2px solid #444;
+}
+
+.setting-content-header {
+    display: flex;
+}
+.setting-content-header img {
+    width: 30px;
+    height: 30px;
+    padding-top: 10px;
+}
+.setting-content-header h1 {
+    padding-left: 20px;
+    margin-top: 12px;
+}
+
+.setting h2 {
+    font-size: 16px;
+}
+
+.setting-content-input {
+    display: flex;
+    justify-content: space-between;
+}
+.setting-content-input input {
+    width: 100px;
+    height: 40px;
+    background: #333;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+}
+
+.auto-start-breaks,
+.auto-start-pomodoros,
+.long-break-interval {
+    display: flex;
+    justify-content: space-between;
+}
+
+.auto-start-breaks button,
+.auto-start-pomodoros button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.auto-start-breaks img,
+.auto-start-pomodoros img {
+    width: 50px;
+    height: 50px;
+}
+
+.auto-start-breaks {
+    padding-top: 10px;
+}
+
+.long-break-interval input {
+    width: 100px;
+    height: 40px;
+    background: #333;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+#ok {
+    background: #333;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 100px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: 75%;
+    margin-top: 10px;
+    cursor: pointer;
 }

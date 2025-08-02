@@ -7,9 +7,9 @@
     <title>Pomodoro Timer</title>
 </head>
 <body>
-    <div class="study visible"></div>
+    <div class="study"></div>
     <div class="rest-short"></div>
-    <div class="rest-long"></div>
+    <div class="rest-long visible"></div>
 
     <div class="heading">
         <button id="home">Pomodoro Timer</button>
@@ -75,5 +75,49 @@
         <div class="task-footer">Promos: 1/3 Finish At 19:51 (0h)</div>
     </div>
     
+    <div class="setting visible">
+        <div class="setting-header">
+            <h1>SETTING</h1>
+            <button id="close"><img src="images/close.png" alt="close"></button>
+        </div>
+        <hr>
+        <div class="setting-content">
+            <div class="setting-content-header">
+                <img src="images/timer.png" alt="timer">
+                <h1>TIMER</h1>
+            </div>
+            <h2>Time (minutes)</h2>
+            <div class="setting-content-input">
+                <div class="pomodoro">
+                    <p>Pomodoro</p>
+                    <input type="number" name="pomodoro" id="pomodoroInput">
+                </div>
+                <div class="short-break">
+                    <p>Short Break</p>
+                    <input type="number" name="shortBreak" id="shortBreakInput">
+                </div>
+                <div class="long-break">
+                    <p>Long Break</p>
+                    <input type="number" name="longBreak" id="longBreakInput">
+                </div>
+            </div>
+            <div class="auto-start-breaks">
+                <h2>Auto Start Breaks</h2>
+                <button id="toggleOff"><img src="images/off.png" alt="off"></button>
+            </div>
+            <div class="auto-start-pomodoros">
+                <h2>Auto Start Pomodoros</h2>
+                <button id="toggleOn"><img src="images/on.png" alt="on"></button>
+            </div>
+            <div class="long-break-interval">
+                <h2>Long Break Interval</h2>
+                <input type="number" name="intervals" id="intervalsInput">
+            </div>
+            <hr>
+            <button id="ok">OK</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
