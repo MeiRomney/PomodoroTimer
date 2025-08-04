@@ -421,3 +421,41 @@ body, html {
     margin-top: 10px;
     cursor: pointer;
 }
+
+.tasks-more {
+    visibility: hidden;
+    position: absolute;
+    z-index: 10;
+    background: #fff;
+    width: 300px;
+    top: 87vh;
+    left: 58%;
+    transform: translateX(-58%);
+    border-radius: 25px;
+}
+.tasks-more.visible {
+    visibility: visible;
+}
+
+.tasks-more button {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+.tasks-more button:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+.tasks-more button img {
+    width: 30px;
+    height: 30px;
+    padding-right: 30px;
+    padding-left: 15px;
+}
