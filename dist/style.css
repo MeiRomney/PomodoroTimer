@@ -291,7 +291,7 @@ body, html {
     border-radius: 15px;
 }
 
-.setting {
+.settings {
     visibility: hidden;
     position: absolute;
     top: 80px;
@@ -304,7 +304,7 @@ body, html {
     border-radius: 25px;
     padding: 20px;
 }
-.setting.visible {
+.settings.visible {
     visibility: visible;
 }
 .setting-header {
@@ -312,7 +312,7 @@ body, html {
     justify-content: space-between;
     padding: 0 20px;
 }
-.setting h1 {
+.settings h1 {
     color: #444;
     font-size: 24px;
 }
