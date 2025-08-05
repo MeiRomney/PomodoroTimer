@@ -459,3 +459,190 @@ body, html {
     padding-right: 30px;
     padding-left: 15px;
 }
+
+.add-tasks {
+    visibility: hidden;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: #fff;
+    width: 500px;
+    border: none;
+    border-radius: 25px;
+    padding: 20px;
+}
+.add-tasks.visible {
+    visibility: visible;
+}
+#work {
+    width: 100%;
+    border: none;
+    color: #444;
+    font-size: 24px;
+    font-weight: bold;
+}
+.add-tasks h2 {
+    font-size: 18px;
+    color: #272727;
+}
+#numPomodoros {
+    background: #727272;
+    border: none;
+    height: 40px;
+    width: 80px;
+    font-size: 30px;
+    padding-left: 10px;
+    margin: 5px;
+    margin-left: 0;
+    margin-top: 0;
+    border-radius: 10px;
+}
+#addNote {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #444;
+    font-weight: bold;
+}
+#notes {
+    background-color: #727272;
+    border: none;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    height: 60px;
+    width: 100%;
+}
+.add-tasks-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.add-tasks-footer button {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 80px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+}
+#cancel {
+    background: none;
+    color: #444;
+}
+#cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+#save {
+    background: #444;
+    color: #fff;
+}
+#save:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Edit tasks */
+.edit-tasks {
+    visibility: hidden;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: #fff;
+    width: 500px;
+    border: none;
+    border-radius: 25px;
+    padding: 20px;
+}
+.edit-tasks.visible {
+    visibility: visible;
+}
+.edit-tasks #work {
+    width: 100%;
+    border: none;
+    color: #444;
+    font-size: 24px;
+    font-weight: bold;
+}
+.edit-tasks h2 {
+    font-size: 18px;
+    color: #272727;
+}
+.edit-tasks #numPomodoros {
+    background: #727272;
+    border: none;
+    height: 40px;
+    width: 80px;
+    font-size: 30px;
+    padding-left: 10px;
+    margin: 5px;
+    margin-left: 0;
+    margin-top: 0;
+    border-radius: 10px;
+}
+.edit-tasks #addNote {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #444;
+    font-weight: bold;
+}
+.edit-tasks #notes {
+    background-color: #727272;
+    border: none;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    height: 60px;
+    width: 100%;
+}
+.edit-tasks-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.edit-tasks-footer button {
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 80px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.edit-tasks #delete {
+    background: none;
+}
+.edit-tasks #delete:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+.edit-tasks #delete img {
+    width: 30px;
+    height: 30px;
+}
+.edit-tasks-footer {
+    display: flex;
+    justify-content: space-between;
+}
+.edit-tasks #cancel {
+    background: none;
+    color: #444;
+}
+.edit-tasks #cancel:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+.edit-tasks #save {
+    background: #444;
+    color: #fff;
+}
+.edit-tasks #save:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
