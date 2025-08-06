@@ -20,6 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const intervalInput = document.getElementById("intervalsInput");
     const okBtn = document.getElementById("ok");
 
+    const tasksMoreBtn = document.getElementById("more");
+    const tasksMorePanel = document.querySelector(".tasks-more");
+    const taskMenuBtn = document.querySelector(".task-menu");
+    const taskMenuPanel = document.querySelector(".edit-tasks");
+    const addTaskBtn = document.getElementById("addTask");
+    const addTaskPanel = document.querySelector(".add-tasks");
+    const cancelBtn = document.getElementById("cancel");
+
+    const clearFinishedBtn = document.getElementById("clearFinishedTasks");
+    const clearActPomodorosBtn = document.getElementById("clearActPomodoros");
+    const clearAllBtn = document.getElementById("clearAllTasks");
+    const taskContent = document.querySelector(".task-content");
+
     // State
     let timer;
     let time = 25 * 60;
@@ -115,6 +128,67 @@ document.addEventListener("DOMContentLoaded", () => {
     okBtn.addEventListener("click", () => {
         settingPanel.classList.remove("visible");
         setMode(mode);
+    });
+
+    tasksMoreBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        tasksMorePanel.classList.toggle("visible");
+    });
+
+    document.addEventListener("click", (event) => {
+        if(
+            tasksMorePanel.classList.contains("visible") &&
+            !tasksMorePanel.contains(event.target) &&
+            !tasksMoreBtn.contains(event.target)
+        ) {
+            tasksMorePanel.classList.remove("visible");
+        }
+    });
+
+    taskMenuBtn.addEventListener("click", () => {
+        taskMenuPanel.classList.toggle("visible");
+    });
+
+    addTaskBtn.addEventListener("click", () => {
+        addTaskPanel.classList.add("visible");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        addTaskPanel.classList.remove("visible");
+        tasksMorePanel.classList.remove("visible");
+    });
+
+    clearFinishedBtn.addEventListener("click", () => {
+        const tasks = taskContent.querySelectorAll(".task");
+        tasks.forEach(task => {
+            const numText = task.querySelector("#num")?.textContent.trim();
+            if(numText) {
+                const [done, total] = numText.split("/").map(Number);
+                if(done === total) {
+                    task.remove();
+                }
+            }
+        });
+    });
+
+    clearActPomodorosBtn.addEventListener("click", () => {
+        const tasks = taskContent.querySelectorAll(".task");
+        tasks.forEach(task => {
+            const numElem = task.querySelector("#num");
+            const numText = numElem?.textContent.trim();
+            if(numText) {
+                const [, total] = numText.split("/").map(Number);
+                numElem.textContent = `0/${total}`;
+            }
+        });
+    });
+
+    clearAllBtn.addEventListener("click", () => {
+        taskContent.innerHTML = "";
+    });
+
+    document.querySelectorAll("#cancel").addEventListener("click", () => {
+        tasksMorePanel.classList.remove("visible");
     });
 
     // Init
