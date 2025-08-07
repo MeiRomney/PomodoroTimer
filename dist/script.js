@@ -33,11 +33,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearAllBtn = document.getElementById("clearAllTasks");
     const taskContent = document.querySelector(".task-content");
 
+    const saveBtn = document.getElementById("save");
+    const taskTitleInput = document.getElementById("work");
+    const taskDetailsInput = document.getElementById("notes");
+    const taskPomodorosInput = document.getElementById("numPomodoros");
+
+    const autoStartBreaksToggle = document.getElementById("autoStartBreaksToggle");
+    const autoStartPomodorosToggle = document.getElementById("autoStartPomodorosToggle");
+
     // State
     let timer;
     let time = 25 * 60;
     let mode = "pomodoro";
     let pomodorosCompleted = 0;
+
+    let autoStartBreaks = false;
+    let autoStartPomodoros = false;
+
+    pomodoroInput.value = 25;
+    shortBreakInput.value = 5;
+    longBreakInput.value = 15;
+    intervalInput.value = 4;
 
     //Functions
     function updateTimeDisplay() {
@@ -102,12 +118,55 @@ document.addEventListener("DOMContentLoaded", () => {
             const interval = parseInt(intervalInput.value) || 4;
             if (pomodorosCompleted % interval === 0) {
                 setMode("long");
+                if (autoStartBreaks) startTimer();
             } else {
                 setMode("short");
+                if (autoStartBreaks) startTimer();
             } 
         } else {
             setMode("pomodoro");
+            if (autoStartPomodoros) startTimer();
         }
+    }
+
+    function createTaskElement(title, details="", pomodoros) {
+        const task = document.createElement("div");
+        task.className = "task";
+
+        task.innerHTML = `
+            <div class="left">
+                <img src="images/unchecked.png" alt="unchecked">
+                <div class="text">
+                    <p id="content">${title}</p>
+                    <p id="details">${details || ""}</p>
+                </div>
+            </div>
+            <div class="right">
+                <p id="num">0/${pomodoros}</p>
+                <button class="task-menu">
+                    <img src="images/moreBlack.png" alt="moreBlack">
+                </button>
+            </div>    
+        `;
+
+        task.querySelector(".task-menu").addEventListener("click", () => {
+            openEditTask(task);
+        });
+
+        taskContent.appendChild(task);
+    }
+
+    function openEditTask(task) {
+        const title = task.querySelector("#content").textContent;
+        const details = task.querySelector("#details").textContent;
+        const [, total] = task.querySelector("#num").textContent.split("/").map(Number);
+
+        taskTitleInput.value = title;
+        taskDetailsInput.value = details;
+        taskPomodorosInput.value = total;
+
+        addTaskPanel.classList.add("visible");
+        taskBeingEdited = task;
     }
 
     // Event Listeners 
@@ -156,6 +215,12 @@ document.addEventListener("DOMContentLoaded", () => {
     cancelBtn.addEventListener("click", () => {
         addTaskPanel.classList.remove("visible");
         tasksMorePanel.classList.remove("visible");
+
+        // Reset edit state
+        taskBeingEdited = null;
+        taskTitleInput.value = "";
+        taskDetailsInput.value = "";
+        taskPomodorosInput.value = 1;
     });
 
     clearFinishedBtn.addEventListener("click", () => {
@@ -187,10 +252,55 @@ document.addEventListener("DOMContentLoaded", () => {
         taskContent.innerHTML = "";
     });
 
-    document.querySelectorAll("#cancel").addEventListener("click", () => {
-        tasksMorePanel.classList.remove("visible");
+    // document.querySelectorAll("#cancel").forEach(cancelBtn => {
+    //     cancelBtn.addEventListener("click", () => {
+    //         tasksMorePanel.classList.remove("visible");
+    //     });
+    // });
+
+    saveBtn.addEventListener("click", () => {
+        const title = taskTitleInput.value.trim();
+        const details = taskDetailsInput.value.trim();
+        const pomodoros = parseInt(taskPomodorosInput.value);
+
+        if(!title || isNaN(pomodoros) || pomodoros <= 0) {
+            alert("Please enter a valid title and pomodoro count.");
+            return;
+        }
+
+        if(taskBeingEdited) {
+            taskBeingEdited.querySelector("#content").textContent = title;
+            taskBeingEdited.querySelector("#details").textContent = details;
+            taskBeingEdited.querySelector("#num").textContent = `0/${pomodoros}`;
+            taskBeingEdited = null;
+        } else {
+            createTaskElement(title, details, pomodoros);
+        }
+
+        //Reset panel
+        taskTitleInput.value = "";
+        taskDetailsInput.value = "";
+        taskPomodorosInput.value = 1;
+        addTaskPanel.classList.remove("visible");
+    });
+
+    autoStartBreaksToggle.addEventListener("click", () => {
+        autoStartBreaks = !autoStartBreaks;
+        autoStartBreaksToggle.querySelector("img").src = autoStartBreaks ? "images/on.png" : "images/off.png";
+    });
+
+    autoStartPomodorosToggle.addEventListener("click", () => {
+        autoStartPomodoros = !autoStartPomodoros;
+        autoStartPomodorosToggle.querySelector("img").src = autoStartPomodoros ? "images/on.png" : "images/off.png";
     });
 
     // Init
     setMode("pomodoro");
+
+    window.onload = () => {
+        const examples = document.querySelectorAll("#ex");
+        examples.forEach(example => {
+            example.remove();
+        });
+    };
 });

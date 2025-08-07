@@ -33,7 +33,7 @@
             <button id="more"><img src="images/more.png" alt="more"></button>
         </div>
         <div class="task-content">
-            <div class="task">
+            <div id="ex" class="task">
                 <div class="left">
                     <img src="images/unchecked.png" alt="unchecked">
                     <div class="text">
@@ -48,7 +48,7 @@
                     </button>
                 </div>
             </div>
-            <div class="task">
+            <div id="ex" class="task">
                 <div class="left">
                     <img src="images/unchecked.png" alt="unchecked">
                     <div class="text">
@@ -103,11 +103,11 @@
             </div>
             <div class="auto-start-breaks">
                 <h2>Auto Start Breaks</h2>
-                <button id="toggleOff"><img src="images/off.png" alt="off"></button>
+                <button id="autoStartBreaksToggle"><img src="images/off.png" alt="off"></button>
             </div>
             <div class="auto-start-pomodoros">
                 <h2>Auto Start Pomodoros</h2>
-                <button id="toggleOn"><img src="images/on.png" alt="on"></button>
+                <button id="autoStartPomodorosToggle"><img src="images/off.png" alt="off"></button>
             </div>
             <div class="long-break-interval">
                 <h2>Long Break Interval</h2>
@@ -136,7 +136,7 @@
     <div class="add-tasks">
         <input id="work" type="text" placeholder="What are you working on?">
         <h2>Est Pomodoros</h2>
-       <input id="numPomodoros" type="number" id="estPomodoros">
+       <input id="numPomodoros" type="number">
        <br>
        <button id="addNote">+ Add Note</button><br>
        <input type="text" id="notes" placeholder="Some notes...">
@@ -149,7 +149,7 @@
     <div class="edit-tasks">
         <input id="work" type="text" placeholder="What are you working on?">
         <h2>Est Pomodoros</h2>
-       <input id="numPomodoros" type="number" id="estPomodoros">
+       <input id="numPomodoros" type="number">
        <br>
        <button id="addNote">+ Add Note</button><br>
        <input type="text" id="notes" placeholder="Some notes...">
