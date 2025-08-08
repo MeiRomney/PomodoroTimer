@@ -222,7 +222,7 @@ body, html {
     margin: 0;
     font-weight: bold;
 }
-#num {
+.right.num {
     margin: 0;
     font-weight: bold;
 }
@@ -645,4 +645,9 @@ body, html {
 }
 .edit-tasks #save:hover {
     background: rgba(0, 0, 0, 0.5);
+}
+
+.task.selected {
+    border: 2px solid white;
+    box-shadow: 0 0 10px white;
 }

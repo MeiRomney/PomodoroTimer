@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     longBreakInput.value = 15;
     intervalInput.value = 4;
 
+    let tasks = [];
+    let selectedTask = null;
+
     //Functions
     function updateTimeDisplay() {
         const minutes = String(Math.floor(time / 60)).padStart(2, '0');
@@ -64,28 +67,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setMode(newMode) {
         clearInterval(timer);
-        if(newMode === "pomodoro") {
-            time = (parseInt(pomodoroInput.value) || 25) * 60;
-            studyBg.classList.add("visible");
-            longRestBg.classList.remove("visible");
-            shortRestBg.classList.remove("visible");
-        } else if (newMode === "short") {
-            time = (parseInt(shortBreakInput.value) || 5) * 60;
-            studyBg.classList.remove("visible");
-            shortRestBg.classList.add("visible");
-            longRestBg.classList.remove("visible");
-        } else if (newMode === "long") {
-            time = (parseInt(longBreakInput.value) || 15) * 60;
-            studyBg.classList.remove("visible");
-            shortRestBg.classList.remove("visible");
-            longRestBg.classList.add("visible");
+
+        let duration = 25;
+        // if(newMode === "pomodoro") {
+        //     time = (parseInt(pomodoroInput.value) || 25) * 60;
+        //     studyBg.classList.add("visible");
+        //     longRestBg.classList.remove("visible");
+        //     shortRestBg.classList.remove("visible");
+        // } else if (newMode === "short") {
+        //     time = (parseInt(shortBreakInput.value) || 5) * 60;
+        //     studyBg.classList.remove("visible");
+        //     shortRestBg.classList.add("visible");
+        //     longRestBg.classList.remove("visible");
+        // } else if (newMode === "long") {
+        //     time = (parseInt(longBreakInput.value) || 15) * 60;
+        //     studyBg.classList.remove("visible");
+        //     shortRestBg.classList.remove("visible");
+        //     longRestBg.classList.add("visible");
+        // }
+        if(selectedTask) {
+            if(newMode === "pomodoro") duration = selectedTask.pomodoroDuration;
+            else if(newMode === "short") duration = selectedTask.shortBreakDuration;
+            else if(newMode === "long") duration = selectedTask.longBreakDuration;
+        } else {
+            if(newMode === "pomodoro") duration = parseInt(pomodoroInput.value) || 25;
+            else if(newMode === "short") duration = parseInt(shortBreakInput.value) || 5;
+            else if(newMode === "long") duration = parseInt(longBreakInput.value) || 15;
         }
+
+        time = duration * 60;
+
+        studyBg.classList.toggle("visible", newMode === "pomodoro");
+        shortRestBg.classList.toggle("visible", newMode === "short");
+        longRestBg.classList.toggle("visible", newMode === "long");
+
         mode = newMode;
         updateTimeDisplay();
         startBtn.textContent = "START";
     }
 
     function startTimer() {
+        if(!selectedTask && mode === "pomodoro") {
+            alert("Please select a task before starting.");
+            return;
+        }
+
         clearInterval(timer);
         timer = setInterval(() => {
             if (time > 0) {
@@ -114,9 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleSessionEnd() {
         if (mode === "pomodoro") {
-            pomodorosCompleted++;
+            if(selectedTask) {
+                selectedTask.completedPomodoros++;
+                const progress = `${selectedTask.completedPomodoros}/${selectedTask.totalPomodoros}`;
+                selectedTask.element.querySelector(".num").textContent = progress;
+            }
+            
             const interval = parseInt(intervalInput.value) || 4;
-            if (pomodorosCompleted % interval === 0) {
+            if (selectedTask && selectedTask.completedPomodoros % interval === 0) {
                 setMode("long");
                 if (autoStartBreaks) startTimer();
             } else {
@@ -132,6 +163,17 @@ document.addEventListener("DOMContentLoaded", () => {
     function createTaskElement(title, details="", pomodoros) {
         const task = document.createElement("div");
         task.className = "task";
+
+        const taskData = {
+            title,
+            details,
+            totalPomodoros: pomodoros,
+            completedPomodoros: 0,
+            element: task,
+            pomodoroDuration: parseInt(pomodoroInput.value) || 25,
+            shortBreakDuration: parseInt(shortBreakInput.value) || 5,
+            longBreakDuration: parseInt(longBreakInput.value) || 15
+        };
 
         task.innerHTML = `
             <div class="left">
@@ -153,7 +195,21 @@ document.addEventListener("DOMContentLoaded", () => {
             openEditTask(task);
         });
 
+        task.addEventListener("click", () => {
+            selectTask(taskData);
+        });
+
         taskContent.appendChild(task);
+        tasks.push(taskData);
+    }
+
+    function selectTask(taskData) {
+        tasks.forEach(t => t.element.classList.remove("selected"));
+
+        selectedTask = taskData;
+        taskData.element.classList.add("selected");
+
+        setMode("pomodoro");
     }
 
     function openEditTask(task) {
