@@ -107,10 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function startTimer() {
-        if(!selectedTask && mode === "pomodoro") {
-            alert("Please select a task before starting.");
-            return;
-        }
+        // if(!selectedTask && mode === "pomodoro") {
+        //     alert("Please select a task before starting.");
+        //     return;
+        // }
 
         clearInterval(timer);
         timer = setInterval(() => {
@@ -146,14 +146,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectedTask.element.querySelector(".num").textContent = progress;
             }
             
-            const interval = parseInt(intervalInput.value) || 4;
-            if (selectedTask && selectedTask.completedPomodoros % interval === 0) {
+            const interval = parseInt(intervalInput.value); // || 4;
+            const isValidInterval = !isNaN(interval) && interval > 0;
+            const shouldTakeLongBreak = (
+                isValidInterval &&
+                selectedTask &&
+                selectedTask.completedPomodoros > 0 &&
+                selectedTask.completedPomodoros % interval === 0
+            );
+
+            //if (isValidInterval && selectedTask && selectedTask.completedPomodoros % interval === 0) {
+            if (shouldTakeLongBreak) {
                 setMode("long");
-                if (autoStartBreaks) startTimer();
             } else {
                 setMode("short");
-                if (autoStartBreaks) startTimer();
             } 
+
+            if (autoStartBreaks) startTimer();
+
         } else {
             setMode("pomodoro");
             if (autoStartPomodoros) startTimer();
@@ -203,14 +213,14 @@ document.addEventListener("DOMContentLoaded", () => {
         tasks.push(taskData);
     }
 
-    function selectTask(taskData) {
-        tasks.forEach(t => t.element.classList.remove("selected"));
+    // function selectTask(taskData) {
+    //     tasks.forEach(t => t.element.classList.remove("selected"));
 
-        selectedTask = taskData;
-        taskData.element.classList.add("selected");
+    //     selectedTask = taskData;
+    //     taskData.element.classList.add("selected");
 
-        setMode("pomodoro");
-    }
+    //     setMode("pomodoro");
+    // }
 
     function openEditTask(task) {
         const title = task.querySelector("#content").textContent;
